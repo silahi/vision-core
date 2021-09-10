@@ -7,8 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,18 +21,14 @@ public class Admin {
     private String email;
     private String telephone;
     private String motDePasse;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date depuis;
 
-    @ManyToOne
-    @JoinTable(name = "PHOTOS_DE_ADMIN")
-    private List<Photo> photosAjoutes = new ArrayList<>();
+    @OneToMany
+    private List<Photo> photos = new ArrayList<>();
 
-    @ManyToOne
-    @JoinTable(name = "PHOTOS_VALIDES_PAR_ADMIN")
-    private List<Photo> photosValides = new ArrayList<>();
-
-    @ManyToOne
+    @OneToMany
     private List<Membre> membres = new ArrayList<>();
 
     public Admin() {
@@ -110,22 +105,6 @@ public class Admin {
                 + nom + ", prenom=" + prenom + ", telephone=" + telephone + "]";
     }
 
-    public List<Photo> getPhotosAjoutes() {
-        return photosAjoutes;
-    }
-
-    public void setPhotosAjoutes(List<Photo> photosAjoutes) {
-        this.photosAjoutes = photosAjoutes;
-    }
-
-    public List<Photo> getPhotosValides() {
-        return photosValides;
-    }
-
-    public void setPhotosValides(List<Photo> photosValides) {
-        this.photosValides = photosValides;
-    }
-
     public List<Membre> getMembres() {
         return membres;
     }
@@ -133,5 +112,15 @@ public class Admin {
     public void setMembres(List<Membre> membres) {
         this.membres = membres;
     }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    
 
 }
