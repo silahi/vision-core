@@ -29,7 +29,7 @@ public class Admin {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Photo> photos = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Membre> membres = new ArrayList<>();
 
     public Admin() {

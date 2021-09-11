@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.alhous.vision.visioncore.util.Utilities.EtatMembre;
 
 @Entity
 public class Membre {
@@ -22,10 +27,12 @@ public class Membre {
     private String telephone;
     private String motDePasse;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date depuis;
-    private boolean valid;
+    private Date depuis; 
 
-    @OneToMany
+    @Enumerated(EnumType.STRING)
+    private EtatMembre etatMembre = EtatMembre.SUSPENDU;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Photo> photos = new ArrayList<>(); 
 
     public Membre(String nom, String prenom, String email, String telephone, String motDePasse, Date depuis) {
@@ -94,17 +101,16 @@ public class Membre {
 
     public void setDepuis(Date depuis) {
         this.depuis = depuis;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     } 
-
     
+
+    public EtatMembre getEtatMembre() {
+        return etatMembre;
+    }
+
+    public void setEtatMembre(EtatMembre etatMembre) {
+        this.etatMembre = etatMembre;
+    }
 
     public List<Photo> getPhotos() {
         return photos;
@@ -117,7 +123,7 @@ public class Membre {
     @Override
     public String toString() {
         return "Membre [depuis=" + depuis + ", email=" + email + ", id=" + id + ", motDePasse=" + motDePasse + ", nom="
-                + nom + ", prenom=" + prenom + ", telephone=" + telephone + ", valid=" + valid + "]";
+                + nom + ", prenom=" + prenom + ", telephone=" + telephone + ", etatMembre=" + etatMembre + "]";
     }
 
 }
