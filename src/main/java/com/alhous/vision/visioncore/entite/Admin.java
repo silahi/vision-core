@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Admin {
     @Temporal(TemporalType.TIMESTAMP)
     private Date depuis;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Photo> photos = new ArrayList<>();
 
     @OneToMany

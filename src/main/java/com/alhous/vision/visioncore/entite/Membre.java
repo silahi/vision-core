@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,7 @@ public class Membre {
     private Date depuis;
     private boolean valid;
 
+    @OneToMany
     private List<Photo> photos = new ArrayList<>(); 
 
     public Membre(String nom, String prenom, String email, String telephone, String motDePasse, Date depuis) {
