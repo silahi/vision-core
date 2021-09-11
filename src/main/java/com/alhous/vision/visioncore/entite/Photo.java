@@ -12,6 +12,8 @@ import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.alhous.vision.visioncore.util.Utilities.EtatPhoto;
+
 @Entity
 public class Photo {
     @Id
@@ -21,16 +23,15 @@ public class Photo {
     @Lob
     private byte[] pixels;
     private String categorie;
-    private boolean valid;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateAjout;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateValide;
+    private EtatPhoto etatPhoto = EtatPhoto.INVALID;
 
-    public Photo(byte[] pixels, String categorie, boolean valid, Date dateAjout, Date dateValide) {
+    public Photo(byte[] pixels, String categorie, Date dateAjout, Date dateValide) {
         this.pixels = pixels;
         this.categorie = categorie;
-        this.valid = valid;
         this.dateAjout = dateAjout;
         this.dateValide = dateValide;
     }
@@ -62,12 +63,12 @@ public class Photo {
         this.categorie = categorie;
     }
 
-    public boolean isValid() {
-        return valid;
+    public EtatPhoto getEtatPhoto() {
+        return etatPhoto;
     }
 
-    public void setValid(boolean valid) {
-        this.valid = valid;
+    public void setEtatPhoto(EtatPhoto etatPhoto) {
+        this.etatPhoto = etatPhoto;
     }
 
     public Date getDateAjout() {
@@ -89,7 +90,7 @@ public class Photo {
     @Override
     public String toString() {
         return "Photo [categorie=" + categorie + ", dateAjout=" + dateAjout + ", dateValide=" + dateValide + ", id="
-                + id + ", pixels=" + Arrays.toString(pixels) + ", valid=" + valid + "]";
+                + id + ", pixels=" + Arrays.toString(pixels) + ", etatPhoto=" + etatPhoto + "]";
     }
 
 }
