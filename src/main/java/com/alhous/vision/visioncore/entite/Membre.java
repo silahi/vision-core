@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -27,13 +28,13 @@ public class Membre {
     private String telephone;
     private String motDePasse;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date depuis; 
+    private Date depuis;
 
     @Enumerated(EnumType.STRING)
     private EtatMembre etatMembre = EtatMembre.SUSPENDU;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Photo> photos = new ArrayList<>(); 
+    @OneToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Photo> photos = new ArrayList<>();
 
     public Membre(String nom, String prenom, String email, String telephone, String motDePasse, Date depuis) {
         this.nom = nom;
@@ -101,8 +102,7 @@ public class Membre {
 
     public void setDepuis(Date depuis) {
         this.depuis = depuis;
-    } 
-    
+    }
 
     public EtatMembre getEtatMembre() {
         return etatMembre;

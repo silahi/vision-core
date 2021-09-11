@@ -3,9 +3,9 @@ package com.alhous.vision.visioncore.entite;
 import java.util.Arrays;
 import java.util.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -19,7 +19,7 @@ public class Photo {
     @Id
     @GeneratedValue
     private Long id;
-    @Basic(fetch = FetchType.LAZY)
+     
     @Lob
     private byte[] pixels;
     private String categorie;
@@ -27,6 +27,7 @@ public class Photo {
     private Date dateAjout;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateValide;
+    @Enumerated(EnumType.STRING)
     private EtatPhoto etatPhoto = EtatPhoto.INVALID;
 
     public Photo(byte[] pixels, String categorie, Date dateAjout, Date dateValide) {

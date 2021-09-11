@@ -1,14 +1,10 @@
 package com.alhous.vision.visioncore.entite;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,12 +21,6 @@ public class Admin {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date depuis;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Photo> photos = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Membre> membres = new ArrayList<>();
 
     public Admin() {
     }
@@ -105,23 +95,5 @@ public class Admin {
         return "Admin [depuis=" + depuis + ", email=" + email + ", id=" + id + ", motDePasse=" + motDePasse + ", nom="
                 + nom + ", prenom=" + prenom + ", telephone=" + telephone + "]";
     }
-
-    public List<Membre> getMembres() {
-        return membres;
-    }
-
-    public void setMembres(List<Membre> membres) {
-        this.membres = membres;
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
-    
 
 }
