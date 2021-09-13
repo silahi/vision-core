@@ -49,8 +49,7 @@ public class AdminImpl implements IAdmin {
     public void desactiverCompteMembre(Long id) {
         Membre m = membreRepository.findById(id).get();
         m.setEtatMembre(EtatMembre.SUSPENDU);
-        membreRepository.save(m);
-
+        membreRepository.save(m); 
     }
 
     @Override
@@ -60,8 +59,7 @@ public class AdminImpl implements IAdmin {
             m.getPhotos().stream().filter(ph -> ph.getId() == p.getId()).findFirst()
                     .ifPresent(pho -> pho.setEtatPhoto(EtatPhoto.VALID));
         });
-        membreRepository.save(m);
-
+        membreRepository.save(m); 
     }
 
 }
